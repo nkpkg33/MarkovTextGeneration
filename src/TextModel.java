@@ -17,25 +17,42 @@ public class TextModel {
 			b = new Bag();
 			map.put(word, b);
 		}
-		
+
 		return b;
 	}
-	
-	// Adds the observed word pair word and followingWord to the Markov model data
+
+	// Adds the observed word pair word and followingWord to the Markov model
+	// data
 	public void addWordPair(String word, String followingWord) {
-		/* you implement this one! */
+
+		Bag b = getBagForWord(word);
+
+		b.add(followingWord);
+
 	}
 
 	public void loadData(String filename) {
 		String text = getFileAsString(filename);
 		
-		// Add all words in text to your model
-	}
-	
-	public String predictNextWord(String word) {
-		/* you implement this! */
+		String[] splitted = text.split(" ");
 		
-		return "IMPLEMENT PREDICTNEXTWORD";
+		for (int i = 0; i < splitted.length - 1; i++){
+			
+			addWordPair(splitted[i], splitted[i+1]);
+			
+		}
+
+	}
+
+	public String predictNextWord(String word) {
+
+		Bag b = map.get(word);
+		if(b == null){
+		System.out.println(word);
+		}
+			return b.getRandomByFrequency();
+		
+		
 	}
 
 	public static String getFileAsString(String path) {
