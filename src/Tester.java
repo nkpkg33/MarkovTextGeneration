@@ -4,11 +4,11 @@ public class Tester {
 
 	public static void main(String[] args) {
 		TextModel model = new TextModel();	// create your model
-		model.loadData("Siddarta.txt");		// load the data
+		model.loadData("shakespeare.txt");		// load the data
 
 		String output = "";
 
-		String word = "His";			// Choose starting word
+		String word = "Romeo";			// Choose starting word
 		output += word;
 
 		for (int i = 0; i < MAX_WORD_LENGTH; i++) {
@@ -22,5 +22,30 @@ public class Tester {
 		}
 
 		System.out.println(output);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		FiveGramModel model2 = new FiveGramModel();	// create your model
+		model2.loadData("shakespeare.txt");		// load the data
+
+		String output2 = "";
+
+		String word2 = "Thou ";			// Choose starting word
+		output2 += word2;
+
+		for (int i = 0; i < MAX_WORD_LENGTH; i++) {
+			String nextWord = model.predictNextWord(word);
+			
+			output2 += " " + nextWord ;
+			
+			if (i % 8 == 0) output2 += "\n";    // add some line breaks in the output
+			
+			word2 = nextWord;
+		}
+
+		System.out.println(output2);
 	}
 }
