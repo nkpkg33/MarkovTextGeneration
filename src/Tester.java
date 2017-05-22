@@ -3,18 +3,20 @@ public class Tester {
 	private static final int MAX_WORD_LENGTH = 100;
 
 	public static void main(String[] args) {
-		TextModel model = new TextModel();	// create your model
-		model.loadData("shakespeare.txt");		// load the data
+		ThirdLevelTextModel model = new ThirdLevelTextModel();	// create your model
+		
+		model.loadData("countofmontecristo.txt");		// load the data
 
 		String output = "";
 
-		String word = "Romeo";			// Choose starting word
+		String word = "He was a";
+		
 		output += word;
 
 		for (int i = 0; i < MAX_WORD_LENGTH; i++) {
 			String nextWord = model.predictNextWord(word);
 			
-			output += " " + nextWord ;
+			output += " " + nextWord;
 			
 			if (i % 8 == 0) output += "\n";    // add some line breaks in the output
 			
@@ -23,7 +25,7 @@ public class Tester {
 
 		System.out.println(output);
 		
-		System.out.println();
+		/*System.out.println();
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -33,7 +35,7 @@ public class Tester {
 
 		String output2 = "";
 
-		String word2 = "Thou ";			// Choose starting word
+		String word2 = "When ";			// Choose starting word
 		output2 += word2;
 
 		for (int i = 0; i < MAX_WORD_LENGTH; i++) {
@@ -46,6 +48,6 @@ public class Tester {
 			word2 = nextWord;
 		}
 
-		System.out.println(output2);
+		System.out.println(output2);*/
 	}
 }
