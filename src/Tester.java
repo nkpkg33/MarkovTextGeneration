@@ -1,15 +1,24 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.List;
+import java.util.Map;
+
+import org.boon.json.JsonFactory;
+import org.boon.json.ObjectMapper;
+
 public class Tester {
 
 	private static final int MAX_WORD_LENGTH = 100;
 
 	public static void main(String[] args) {
-		ThirdLevelTextModel model = new ThirdLevelTextModel();	// create your model
+		SecondLevelTwitterTextModel model = new SecondLevelTwitterTextModel();	// create your model
+		model.loadData("condensed_2016.txt");		// load the data
 		
-		model.loadData("countofmontecristo.txt");		// load the data
+		
 
-		String output = "";
+		/*String output = "";
 
-		String word = "He was a";
+		String word = "Happy Birthday";
 		
 		output += word;
 
@@ -21,9 +30,9 @@ public class Tester {
 			if (i % 8 == 0) output += "\n";    // add some line breaks in the output
 			
 			word = nextWord;
-		}
+		}*/
 
-		System.out.println(output);
+		//System.out.println(output);
 		
 		/*System.out.println();
 		System.out.println();
@@ -49,5 +58,21 @@ public class Tester {
 		}
 
 		System.out.println(output2);*/
+	}
+	
+	public static String getFileAsString(String path) {
+		StringBuilder b = new StringBuilder();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String line = br.readLine();
+			while (line != null) {
+				b.append(line);
+				line = br.readLine();
+			}
+		} catch (Exception e) {
+			System.out.println("Something wrong: " + e.getMessage());
+		}
+
+		return b.toString();
 	}
 }

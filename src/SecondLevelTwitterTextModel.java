@@ -2,16 +2,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 
-public class SecondLevelTextModel {
+public class SecondLevelTwitterTextModel {
+	
 	private HashMap<String, Bag> map;
+	
 
-	public SecondLevelTextModel() {
+	public SecondLevelTwitterTextModel() {
 		map = new HashMap<String, Bag>();
-		
 	}
 
 	private Bag getBagForWord(String word) {
@@ -37,13 +40,23 @@ public class SecondLevelTextModel {
 	}
 
 	public void loadData(String filename) {
+		
 		String text = getFileAsString(filename);
+		
+		ArrayList<String> tweets = new ArrayList<String>();
+		
+		for (int i = 0; i < text.length(); i++) {
+			if (text.indexOf("text: ", i) != -1) {
+				tweets.add(text.substring(i, text.indexOf(" \"created_at\"", i)));
+			}
+		}
 		
 		ArrayList<String> arr = new ArrayList<String>();
 		
 		String temp = "";
 		
 		int state = 0;
+		
 		
 		for (int i = 0; i < text.length(); i++){
 			
@@ -81,9 +94,9 @@ public class SecondLevelTextModel {
 			addWordPair(arr.get(i), arr.get(i + 1));
 			
 		}
-			
+		
+		
 		}
-
 	
 
 	public String predictNextWord(String word) {
@@ -112,4 +125,5 @@ public class SecondLevelTextModel {
 
 		return b.toString();
 	}
+
 }
